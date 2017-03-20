@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">美日</string>
+    <string name="menu_news">新闻收藏</string>
+    <string name="menu_pic">图片收藏</string>
+    <string name="menu_interest">我的关注</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
 </resources>

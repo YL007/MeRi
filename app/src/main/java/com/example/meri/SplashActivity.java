@@ -14,7 +14,7 @@ import com.example.meri.activity.GuildActivity;
 import com.example.meri.activity.MainActivity;
 import com.example.meri.utils.CacheUtils;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
     //静态常量
     public static final String START_MAIN = "start_main";
     private RelativeLayout rl_welcome;
@@ -55,13 +55,13 @@ public class WelcomeActivity extends AppCompatActivity {
         public void onAnimationEnd(Animation animation) {
             Intent intent;
             //判断是否进入主界面
-            boolean isStartMain = CacheUtils.getBoolean(WelcomeActivity.this,START_MAIN);
+            boolean isStartMain = CacheUtils.getBoolean(SplashActivity.this,START_MAIN);
             if (isStartMain){
                 //非第一次，直接进入主界面
-                intent = new Intent(WelcomeActivity.this,MainActivity.class);
+                intent = new Intent(SplashActivity.this,MainActivity.class);
             }else{
                 //第一次，进入引导界面
-                intent = new Intent(WelcomeActivity.this,GuildActivity.class);
+                intent = new Intent(SplashActivity.this,GuildActivity.class);
             }
             startActivity(intent);
             //关闭欢迎页面

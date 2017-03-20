@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.meri.R;
-import com.example.meri.WelcomeActivity;
+import com.example.meri.SplashActivity;
 import com.example.meri.utils.CacheUtils;
 import com.example.meri.utils.DensityUtil;
 
@@ -98,7 +98,7 @@ public class GuildActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //1.保存曾经进入过的主页面
-                    CacheUtils.putBoolean(GuildActivity.this, WelcomeActivity.START_MAIN,true);
+                    CacheUtils.putBoolean(GuildActivity.this, SplashActivity.START_MAIN,true);
                     //2.跳转到主页面
                     Intent intent = new Intent(GuildActivity.this,MainActivity.class);
                     startActivity(intent);
