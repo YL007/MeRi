@@ -1,4 +1,4 @@
-package com.example.meri.fragment;
+package com.example.meri.base;
 
 import android.app.Activity;
 import android.os.Bundle;
