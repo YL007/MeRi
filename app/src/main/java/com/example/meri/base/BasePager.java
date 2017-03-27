@@ -23,6 +23,7 @@ public class BasePager{
     //左侧菜单
     public ImageButton ib_menu;
     //加载子页面
+
     public FrameLayout fl_content;
 
     public BasePager(Context context){
