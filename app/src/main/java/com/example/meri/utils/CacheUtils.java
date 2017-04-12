@@ -1,5 +1,6 @@
 package com.example.meri.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -23,5 +24,15 @@ public class CacheUtils {
     public static void putBoolean(Context context, String key, boolean value) {
         SharedPreferences sp = context.getSharedPreferences("Cache", Context.MODE_PRIVATE);
         sp.edit().putBoolean(key, value).commit();
+    }
+
+    public static void putString(Activity context, String key, String value) {
+        SharedPreferences sp = context.getSharedPreferences("Cache", Context.MODE_PRIVATE);
+        sp.edit().putString(key, value).commit();
+    }
+
+    public static String getString(Activity context, String key) {
+        SharedPreferences sp = context.getSharedPreferences("Cache", Context.MODE_PRIVATE);
+        return sp.getString(key,"");
     }
 }

@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <com.example.meri.view.NoScrollViewPager
-        android:id="@+id/viewpager"
-        android:layout_weight="1"
+        android:id="@+id/content_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -41,7 +41,7 @@
             android:id="@+id/rb_me"
             android:drawableTop="@drawable/rb_me_selector"
             android:gravity="center"
-            android:text="我"
+            android:text="我的"
             style="@style/style_button_subject"
             />
     </RadioGroup>

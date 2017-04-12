@@ -37,9 +37,15 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        TextView tv = new TextView(getActivity());
+//        tv.setText(getArguments().getString("key"));
         return initView();
     }
 
+    /**
+     * 让孩子实现自己的视图
+     * @return
+     */
     public abstract View initView();
 
     /**

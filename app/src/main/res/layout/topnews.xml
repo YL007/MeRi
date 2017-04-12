@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/news_storiespagers"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+    </android.support.v4.view.ViewPager>
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:padding="5dp">-->
+
+    <LinearLayout
+        android:id="@+id/topstory_dotgroups"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/news_storiespagers"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <View
+            android:id="@+id/dot_0"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_focused" />
+
+        <View
+            android:id="@+id/dot_1"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_normal" />
+
+        <View
+            android:id="@+id/dot_2"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_normal" />
+
+        <View
+            android:id="@+id/dot_3"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_normal" />
+
+        <View
+            android:id="@+id/dot_4"
+            android:layout_width="@dimen/dot_length"
+            android:layout_height="@dimen/dot_length"
+            android:layout_marginLeft="@dimen/dot_distance"
+            android:layout_marginRight="@dimen/dot_distance"
+            android:background="@drawable/dot_normal" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_todaynews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/topstory_dotgroups"
+        android:layout_marginBottom="8sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:layout_marginTop="8sp"
+        android:text=""
+        android:textColor="@android:color/background_light"
+        android:textSize="25sp" />
+    <!--</RelativeLayout>-->
+</RelativeLayout>

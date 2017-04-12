@@ -10,6 +10,10 @@ import org.xutils.x;
  */
 
 public class MrApplication extends Application {
+
+    /**
+     * 所有组件创建之前执行
+     */
     @Override
     public void onCreate() {
         super.onCreate();
