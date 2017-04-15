@@ -2,6 +2,7 @@ package com.example.meri.fragment;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.View;
@@ -48,12 +49,14 @@ public class NewsFragment extends BaseFragment {
     private List<NewsBean.StoriesBean> stories; //listView新闻数据
     private NewsListAdapter adapter;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public View initView() {
-        View view = View.inflate(context,R.layout.main_newscontent,null);
+        View view = View.inflate(context, R.layout.main_newscontent, null);
         listview = (ListView) view.findViewById(R.id.listview);
 
-        View topNews = View.inflate(context,R.layout.topnews,null);
+        View topNews = View.inflate(context, R.layout.topnews, null);
         viewPager = (ViewPager) topNews.findViewById(R.id.news_storiespagers);
         tv_todaynews = (TextView) topNews.findViewById(R.id.tv_todaynews);
         TextPaint tp = tv_todaynews.getPaint();
@@ -62,6 +65,18 @@ public class NewsFragment extends BaseFragment {
 
         //顶部轮播图以头的方式添加到listView
         listview.addHeaderView(topNews);
+
+        //下拉刷新
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataFromNet();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         return view;
 
@@ -74,27 +89,32 @@ public class NewsFragment extends BaseFragment {
         //获取缓存数据
         String saveJson = CacheUtils.getString(context, NEWS_URL);
         if (!TextUtils.isEmpty(saveJson)) {
+            //解析数据
             processDate(saveJson);
         }
 
         //联网请求数据
         getDataFromNet();
 
-        //设置viewPager数据
-
     }
 
     private void getDataFromNet() {
         HttpUtils.sendOkHttpRequest(NEWS_URL, new Callback() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, final Response response) throws IOException {
                 LogUtils.e("联网请求成功==" + response.body().toString());
-                String result = response.body().string();
-                //缓存数据
-                CacheUtils.putString(context, NEWS_URL, result);
+                final String result = response.body().string();
 
-                //解析json数据并显示
-                processDate(result);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //缓存数据
+                        CacheUtils.putString(context, NEWS_URL, result);
+                        //解析json数据并显示
+                        processDate(result);
+                    }
+                });
+
             }
 
             @Override
@@ -117,17 +137,36 @@ public class NewsFragment extends BaseFragment {
         //设置viewPager适配器
         viewPager.setAdapter(new TopStoriesPagerAdapter());
 
+        //添加红点
+        addPoint();
+
+        //监听页面改变，设置圆点变化和文本改变
+        viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
+        tv_todaynews.setText(top_stories.get(prePosition).getTitle());
+
+        //准备listView数据
+        stories = bean.getStories();
+        //设置ListView适配器
+        adapter = new NewsListAdapter();
+        listview.setAdapter(adapter);
+
+        //下拉刷新
+
+
+    }
+
+    private void addPoint() {
         topstory_dotgroups.removeAllViews();    //移除所有红点
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtil.dip2px(8),DensityUtil.dip2px(8));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtil.dip2px(8), DensityUtil.dip2px(8));
 
 
         for (int i = 0; i < top_stories.size(); i++) {
             ImageView imageView = new ImageView(context);
             imageView.setBackgroundResource(R.drawable.point_selector);
-            if (i==0){
+            if (i == 0) {
                 imageView.setEnabled(true);
-            }else{
+            } else {
                 imageView.setEnabled(false);
                 params.leftMargin = DensityUtil.dip2px(8);
             }
@@ -136,19 +175,10 @@ public class NewsFragment extends BaseFragment {
 
             topstory_dotgroups.addView(imageView);
         }
-
-        //监听页面改变，设置圆点变化和文本改变
-        viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
-        tv_todaynews.setText(top_stories.get(0).getTitle());
-
-        //准备listView数据
-        stories = bean.getStories();
-        //设置ListView适配器
-        adapter = new NewsListAdapter();
-        listview.setAdapter(adapter);
     }
 
-    class NewsListAdapter extends BaseAdapter{
+
+    class NewsListAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -168,14 +198,14 @@ public class NewsFragment extends BaseFragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder;
-            if (convertView == null){
-                convertView = View.inflate(context,R.layout.item_newslist,null);
+            if (convertView == null) {
+                convertView = View.inflate(context, R.layout.item_newslist, null);
                 viewHolder = new ViewHolder();
                 viewHolder.iv_newspic = (ImageView) convertView.findViewById(iv_newspic);
                 viewHolder.tv_newscontent = (TextView) convertView.findViewById(R.id.tv_newscontent);
 
                 convertView.setTag(viewHolder);
-            }else{
+            } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
@@ -183,7 +213,7 @@ public class NewsFragment extends BaseFragment {
             NewsBean.StoriesBean newsStories = stories.get(position);
             //设置图片
             List<String> storiesImage = newsStories.getImages();
-            x.image().bind(viewHolder.iv_newspic,storiesImage.get(0));
+            x.image().bind(viewHolder.iv_newspic, storiesImage.get(0));
             //设置标题
             viewHolder.tv_newscontent.setText(newsStories.getTitle());
 
@@ -192,12 +222,12 @@ public class NewsFragment extends BaseFragment {
         }
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         ImageView iv_newspic;
         TextView tv_newscontent;
     }
 
-    class MyOnPageChangeListener implements ViewPager.OnPageChangeListener{
+    class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -235,6 +265,7 @@ public class NewsFragment extends BaseFragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = new ImageView(context);
+            imageView.setBackgroundResource(R.drawable.news_default);
             imageView.setScaleType(imageView.getScaleType().FIT_XY);
             container.addView(imageView);
 
