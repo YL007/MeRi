@@ -1,5 +1,6 @@
 package com.example.meri.fragment;
 
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,13 +8,16 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.meri.R;
+import com.example.meri.activity.NewsDetailActivity;
 import com.example.meri.base.BaseFragment;
 import com.example.meri.bean.NewsBean;
 import com.example.meri.utils.CacheUtils;
@@ -32,6 +36,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import static com.example.meri.R.id.iv_newspic;
+import static com.example.meri.api.ApiConstants.NEWS_DETAIL;
 import static com.example.meri.api.ApiConstants.NEWS_URL;
 
 /**
@@ -77,6 +82,22 @@ public class NewsFragment extends BaseFragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+        //设置listView的item的点击监听
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int itemPosition = position - 1;
+                NewsBean.StoriesBean newsDate = stories.get(itemPosition);
+                Toast.makeText(context,"newsDate_id="+newsDate.getId()+
+                        ",newsDate_title"+newsDate.getTitle(),Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(context, NewsDetailActivity.class);
+                intent.putExtra("url",NEWS_DETAIL+stories.get(itemPosition).getId());
+                startActivity(intent);
+            }
+        });
+
 
         return view;
 
@@ -150,8 +171,6 @@ public class NewsFragment extends BaseFragment {
         adapter = new NewsListAdapter();
         listview.setAdapter(adapter);
 
-        //下拉刷新
-
 
     }
 
@@ -177,6 +196,19 @@ public class NewsFragment extends BaseFragment {
         }
     }
 
+//
+//    class MyOnItemClickListener implements AdapterView.OnItemClickListener {
+//
+//        @Override
+//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            int itemPosition = position - 1;
+//            NewsBean.StoriesBean newsDate = stories.get(itemPosition);
+//            Toast.makeText(context,"newsDate_id="+newsDate.getId()+",newsDate_title"+newsDate.getTitle(),Toast.LENGTH_SHORT).show();        }
+//
+//            Intent intent = new Intent(activity, NewsDetailActivity.class);
+//            startActivity(intent);
+//
+//    }
 
     class NewsListAdapter extends BaseAdapter {
 

@@ -7,4 +7,5 @@ package com.example.meri.api;
 
 public class ApiConstants {
     public static final String NEWS_URL = "http://news-at.zhihu.com/api/4/news/latest";
+    public static final String NEWS_DETAIL="http://daily.zhihu.com/story/";
 }
