@@ -1,6 +1,7 @@
 package com.example.meri.fragment;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -58,7 +59,7 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        View view = View.inflate(context, R.layout.main_newscontent, null);
+        View view = View.inflate(context,R.layout.main_newscontent,null);
         listview = (ListView) view.findViewById(R.id.listview);
 
         View topNews = View.inflate(context, R.layout.topnews, null);
@@ -78,8 +79,13 @@ public class NewsFragment extends BaseFragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getDataFromNet();
-                swipeRefreshLayout.setRefreshing(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getDataFromNet();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                },2000);
             }
         });
 

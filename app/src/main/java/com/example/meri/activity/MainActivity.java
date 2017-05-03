@@ -134,15 +134,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (position) {
                     case 0:
                         rb_news.setChecked(true);
+                        mToolbar.setTitle("每日新闻");
                         break;
                     case 1:
                         rb_pic.setChecked(true);
+                        mToolbar.setTitle("每日美图");
                         break;
                     case 2:
                         rb_video.setChecked(true);
+                        mToolbar.setTitle("每日短片");
                         break;
                     case 3:
                         rb_me.setChecked(true);
+                        mToolbar.setTitle("我的");
                         break;
                 }
             }
@@ -155,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initDrawerLayout() {
-        mToolbar.setTitle("每日新闻");
+//        mToolbar.setTitle("每日新闻");
         mToolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         mDrawerLayout.addDrawerListener(mToggle);
         setSupportActionBar(mToolbar);

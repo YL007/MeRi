@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".activity.GuildActivity" />
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.NewsDetailActivity"></activity>
+        <activity android:name=".activity.NewsDetailActivity"/>
+        <activity android:name=".activity.PreviewImageActivity"/>
     </application>
 
 </manifest>

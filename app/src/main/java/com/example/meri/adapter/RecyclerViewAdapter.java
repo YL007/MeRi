@@ -12,8 +12,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.meri.R;
 import com.example.meri.bean.PicBean;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by 磊 on 2017/4/20.
@@ -21,61 +21,103 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-    private RecyclerView recyclerView;
-    private LayoutInflater mInflater;
-
+    private static int SCREE_WIDTH = 0;
     private List<Integer> mHeights;
-    private List<PicBean.ResultsBean> mPicList = new ArrayList<>();
-
+    private List<PicBean.ResultsBean> mPicList;
     private Context mContext;
+    private ImageView imageView;
 
-    public RecyclerViewAdapter(Context context, List<PicBean.ResultsBean> picList, List<Integer> heights) {
+
+    //创建item监听接口
+    public interface OnItemClickListener
+    {
+        void onItemClick(View view, int position);
+        void onItemLongClick(View view , int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener)
+    {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+
+
+
+    public RecyclerViewAdapter(Context context, List<PicBean.ResultsBean> picList) {
         this.mContext = context;
         this.mPicList = picList;
-        this.mHeights = heights;
-
+        SCREE_WIDTH = mContext.getResources().getDisplayMetrics().widthPixels;
+/*
         //设置随机高度
         mHeights = new ArrayList<Integer>();
         for (int i = 0; i < mPicList.size(); i++) {
             mHeights.add((int) (100 + Math.random() * 300));
-        }
+        }*/
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.from(mContext).inflate(R.layout.item_pic,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_pic,parent,false);
+        imageView = (ImageView) view.findViewById(R.id.recycler_image);
+        imageView.getLayoutParams().height = (new Random().nextInt(300) + 400);
+        imageView.getLayoutParams().width = SCREE_WIDTH / 2;
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
-        //通过itemview得到每个图片的pararms对象
-        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+
+       /* //通过itemview得到每个图片的pararms对象
+        ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
 
         //将高度修改为传入的随机高度
         params.height = mHeights.get(position);
 
         //设置修改参数
-        holder.itemView.setLayoutParams(params);
+        holder.itemView.setLayoutParams(params);*/
 
-        String url = mPicList.get(position).getUrl();
+        final String url = mPicList.get(position).getUrl();
 
+        //Glide加载图片
         Glide.with(mContext)
                 .load(url)
-                .placeholder(R.drawable.pic_default)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .centerCrop()
+                .placeholder(R.mipmap.pic_default)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView);
 
-//        holder.imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(mContext,PreviewImageActivity.class);
-//                intent.putExtra("url",PIC_IMAGE);
-//                mContext.startActivity(intent);
-//            }
-//        });
+/*        //设置图片点击跳转
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(mContext,PreviewImageActivity.class);
+                intent.putExtra("url", url);
+                mContext.startActivity(intent);
+            }
+        });*/
+
+        if (mOnItemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemClick(holder.itemView, position);
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemLongClick(holder.itemView, position);
+                    return false;
+                }
+            });
+        }
 
     }
 
@@ -92,4 +134,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageView = (ImageView) itemView.findViewById(R.id.recycler_image);
         }
     }
+
+
 }
