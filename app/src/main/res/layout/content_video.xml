@@ -4,11 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout_video"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="每日短片"
-        android:textSize="30sp" />
+        android:layout_height="match_parent">
 
+    <ListView
+        android:id="@+id/listVideoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
