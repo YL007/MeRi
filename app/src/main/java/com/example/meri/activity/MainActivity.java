@@ -1,5 +1,6 @@
 package com.example.meri.activity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -187,6 +188,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.menu_news:
                 Toast.makeText(MainActivity.this, "点击了news", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this,NewsLikeActivity.class);
+                startActivity(intent);
                 break;
             case R.id.menu_pic:
                 Toast.makeText(MainActivity.this, "点击了pic", Toast.LENGTH_SHORT).show();
@@ -239,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewList = new ArrayList<View>();
 
         LayoutInflater mInflater = LayoutInflater.from(this);
-        View tab01 = mInflater.inflate(R.layout.content_news, null);
+        View tab01 = mInflater.inflate(R.layout.content_news1, null);
         View tab02 = mInflater.inflate(R.layout.content_pic, null);
         View tab03 = mInflater.inflate(R.layout.content_video, null);
         View tab04 = mInflater.inflate(R.layout.content_me, null);

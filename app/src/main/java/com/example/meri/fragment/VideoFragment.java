@@ -199,3 +199,4 @@ public class VideoFragment extends BaseFragment {
         JCVideoPlayer.releaseAllVideos();
     }
 }
+

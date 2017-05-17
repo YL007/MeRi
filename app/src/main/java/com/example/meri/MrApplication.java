@@ -2,6 +2,7 @@ package com.example.meri;
 
 import android.app.Application;
 
+import org.litepal.LitePal;
 import org.xutils.x;
 
 
@@ -19,5 +20,6 @@ public class MrApplication extends Application {
         super.onCreate();
         x.Ext.init(this);
         x.Ext.setDebug(true); // 是否输出debug日志, 开启debug会影响性能.
+        LitePal.initialize(this);
     }
 }

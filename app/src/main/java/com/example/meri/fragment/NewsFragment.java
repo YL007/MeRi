@@ -30,6 +30,7 @@ import org.xutils.common.util.DensityUtil;
 import org.xutils.x;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import okhttp3.Call;
@@ -59,7 +60,7 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        View view = View.inflate(context,R.layout.main_newscontent,null);
+        View view = View.inflate(context,R.layout.content_news,null);
         listview = (ListView) view.findViewById(R.id.listview);
 
         View topNews = View.inflate(context, R.layout.topnews, null);
@@ -100,6 +101,8 @@ public class NewsFragment extends BaseFragment {
 
                 Intent intent = new Intent(context, NewsDetailActivity.class);
                 intent.putExtra("url",NEWS_DETAIL+stories.get(itemPosition).getId());
+                intent.putExtra("title",newsDate.getTitle());
+                intent.putExtra("image", (Serializable) newsDate.getImages());
                 startActivity(intent);
             }
         });

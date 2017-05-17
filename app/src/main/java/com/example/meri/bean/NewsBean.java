@@ -1,5 +1,6 @@
 package com.example.meri.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by 磊 on 2017/4/9.
  */
 
-public class NewsBean {
+public class NewsBean implements Serializable{
 
     /**
      * date : 20170409
