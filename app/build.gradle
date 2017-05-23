@@ -34,4 +34,5 @@ dependencies {
     compile 'org.xutils:xutils:3.5.0'
     compile 'fm.jiecao:jiecaovideoplayer:5.5.4'
     compile 'org.litepal.android:core:1.5.1'
+    compile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }

@@ -1,8 +1,7 @@
 package com.example.meri;
 
-import android.app.Application;
-
 import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
 import org.xutils.x;
 
 
@@ -10,7 +9,7 @@ import org.xutils.x;
  * Created by 磊 on 2017/3/23.
  */
 
-public class MrApplication extends Application {
+public class MrApplication extends LitePalApplication {
 
     /**
      * 所有组件创建之前执行

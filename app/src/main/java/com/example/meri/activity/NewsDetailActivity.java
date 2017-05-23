@@ -58,9 +58,17 @@ public class NewsDetailActivity extends AppCompatActivity {
                         item.setIcon(R.drawable.collection_true);
                         String title = getIntent().getStringExtra("title");
                         List<String> image = (List) getIntent().getSerializableExtra("image");
+                        String url = getIntent().getStringExtra("url");
                         newslike.setTitle(title);
                         newslike.setImage(image);
+                        newslike.setUrl(url);
                         newslike.save();
+                        if (newslike.save()) {
+                            Toast.makeText(NewsDetailActivity.this, "存储成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(NewsDetailActivity.this, "存储失败", Toast.LENGTH_SHORT).show();
+                        }
+
                         Toast.makeText(NewsDetailActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                         item.setChecked(true);
                     }else{
