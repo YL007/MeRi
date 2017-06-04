@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="News"></dbname>
+    <dbname value="Image"></dbname>
     <version value="1"></version>
 
     <list>
         <mapping class="com.example.meri.bean.News"/>
+        <mapping class="com.example.meri.bean.Image"/>
     </list>
 </litepal>

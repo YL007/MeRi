@@ -1,12 +1,13 @@
 package com.example.meri.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 磊 on 2017/4/20.
  */
 
-public class PicBean {
+public class PicBean implements Serializable{
 
     /**
      * error : false

@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class VideoFragment extends BaseFragment {
     private int visibleCount;
     private JCVideoPlayerStandard currPlayer;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ImageButton ivImageView;
 
     @Override
     public View initView() {

@@ -260,7 +260,7 @@ public class NewsLikeActivity extends AppCompatActivity implements NewsLikeAdapt
     private void initData() {
         newsList = DataSupport.findAll(News.class);
         //联网请求数据
-        getDataFromNet();
+//        getDataFromNet();
     }
 
     private void getDataFromNet() {

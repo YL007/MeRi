@@ -13,9 +13,9 @@
         android:icon="@mipmap/menu_pic"
         />
 
-    <item
-        android:id="@+id/menu_interest"
-        android:title="@string/menu_interest"
-        android:icon="@mipmap/menu_interest"/>
+    <!--<item-->
+        <!--android:id="@+id/menu_interest"-->
+        <!--android:title="@string/menu_interest"-->
+        <!--android:icon="@mipmap/menu_interest"/>-->
     </group>
 </menu>

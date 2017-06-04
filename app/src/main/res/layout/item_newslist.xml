@@ -41,5 +41,3 @@
         android:visibility="gone"/>
 
 </LinearLayout>
-    <!--android:focusable="false"-->
-    <!--android:focusableInTouchMode="false"-->

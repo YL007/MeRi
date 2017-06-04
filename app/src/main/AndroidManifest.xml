@@ -29,6 +29,7 @@
         <activity android:name=".activity.NewsDetailActivity" />
         <activity android:name=".activity.PreviewImageActivity" />
         <activity android:name=".activity.NewsLikeActivity"/>
+        <activity android:name=".activity.ImageLikeActivity"/>
     </application>
 
 </manifest>

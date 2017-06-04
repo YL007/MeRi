@@ -80,7 +80,7 @@ public class PicFragment extends BaseFragment {
             public void run() {
                 getData(1);
             }
-        },1000);
+        }, 1000);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -91,11 +91,11 @@ public class PicFragment extends BaseFragment {
                         picList.clear();
                         getData(1);
                     }
-                },2000);
+                }, 2000);
             }
         });
 
-        adapter = new RecyclerViewAdapter(context,picList);
+        adapter = new RecyclerViewAdapter(context, picList);
         recyclerView.setAdapter(adapter);
 
         //加载更多
@@ -154,13 +154,14 @@ public class PicFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(context, PreviewImageActivity.class);
-                intent.putExtra("URL",picList.get(position).getUrl());
+                intent.putExtra("URL", picList.get(position).getUrl());
                 startActivity(intent);
             }
 
             @Override
-            public void onItemLongClick(View view, int position) {
+            public boolean onItemLongClick(View view, int position) {
 
+                return false;
             }
         });
     }

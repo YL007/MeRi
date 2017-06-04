@@ -188,15 +188,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.menu_news:
                 Toast.makeText(MainActivity.this, "点击了news", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this,NewsLikeActivity.class);
-                startActivity(intent);
+                Intent intentNews = new Intent(MainActivity.this,NewsLikeActivity.class);
+                startActivity(intentNews);
                 break;
             case R.id.menu_pic:
                 Toast.makeText(MainActivity.this, "点击了pic", Toast.LENGTH_SHORT).show();
+                Intent intentImage = new Intent(MainActivity.this,ImageLikeActivity.class);
+                startActivity(intentImage);
                 break;
-            case R.id.menu_interest:
+/*            case R.id.menu_interest:
                 Toast.makeText(MainActivity.this, "点击了我的关注", Toast.LENGTH_SHORT).show();
-                break;
+                break;*/
         }
         item.setChecked(true);
         mDrawerLayout.closeDrawers();

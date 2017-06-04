@@ -32,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public interface OnItemClickListener
     {
         void onItemClick(View view, int position);
-        void onItemLongClick(View view , int position);
+        boolean onItemLongClick(View view , int position);
     }
 
     private OnItemClickListener mOnItemClickListener;

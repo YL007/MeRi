@@ -116,7 +116,7 @@ public class NewsLikeAdapter extends BaseAdapter {
     }
 
     public interface OnShowItemClickListener {
-        public void onShowItemClick(News bean);
+        void onShowItemClick(News bean);
     }
 
     public void setOnShowItemClickListener(OnShowItemClickListener onShowItemClickListener) {
