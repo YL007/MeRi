@@ -15,3 +15,10 @@ okhttp、Glide、xUtils、LitePal、JieCaoVideoPlayer等
 ## 数据来源
 数据来自于知乎日报、干活集中营、网易视频等，只作为练习所用，不会用于任何商业用途。
 ## 截图
+![image](https://github.com/YL007/MeiRi/raw/master/screenshot/one.png)
+![image](https://github.com/YL007/MeiRi/raw/master/screenshot/two.png)
+![image](https://github.com/YL007/MeiRi/raw/master/screenshot/three.png)
+![image](https://github.com/YL007/MeiRi/raw/master/screenshot/four.png)
+![image](https://github.com/YL007/MeiRi/raw/master/screenshot/five.png)
+![image](https://github.com/YL007/MeiRi/raw/master/screenshot/six.png)
+![image](https://github.com/YL007/MeiRi/raw/master/screenshot/seven.png)
